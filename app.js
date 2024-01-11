@@ -13,7 +13,7 @@ const baseUrl = "https://gw-sandbox-qa.apps.ambientesbc.com/public-partner";
 
 app.post("/tokenBancolombia", async (req, res) => {
   let grant_type = "client_credentials";
-  let scope = "Products-payment:read:user";
+  let scope = "Product-balance:read:user TermsConditions:read:user TermsConditions-register:write:user";
   let client_id = req.body.client_id;
   let client_secret = req.body.client_secret;
   let auth64 = btoa(`${client_id}:${client_secret}`);
@@ -38,7 +38,7 @@ app.post("/tokenBancolombia", async (req, res) => {
   res.json(responseData);
 });
 
-app.get("/tyc", async (req, res) => {
+app.post("/tyc", async (req, res) => {
   let access_token = req.body.access_token;
 
   const headers = {
