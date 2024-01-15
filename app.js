@@ -20,6 +20,7 @@ app.post("/tokenBancolombia", async (req, res) => {
 
   console.log({
     'endpoint': '/tokenBancolombia',
+    'timestamp': new Date(),
     'grant_type': grant_type,
     'client_id': client_id,
     'client_secret': client_secret
@@ -57,6 +58,7 @@ app.post("/tyc", async (req, res) => {
 
   console.log({
     'endpoint': '/tyc',
+    'timestamp': new Date(),
     'access_token': access_token
   })
 
@@ -80,6 +82,7 @@ app.post("/aceptacionTyC", async (req, res) => {
 
   console.log({
     'endpoint': '/aceptacionTyC',
+    'timestamp': new Date(),
     'access_token': access_token,
     'aceptacion': aceptacion
   })
@@ -129,6 +132,7 @@ app.post("/saldoCuenta", async (req, res) => {
 
   console.log({
     'endpoint': '/saldoCuenta',
+    'timestamp': new Date(),
     'access_token': access_token
   })
   let url =
