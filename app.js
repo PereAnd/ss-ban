@@ -18,6 +18,13 @@ app.post("/tokenBancolombia", async (req, res) => {
   let client_secret = req.body.client_secret;
   let auth64 = btoa(`${client_id}:${client_secret}`);
 
+  console.log({
+    'endpoint': '/tokenBancolombia',
+    'grant_type': grant_type,
+    'client_id': client_id,
+    'client_secret': client_secret
+  })
+
   let url = baseUrl + "/sb//security/oauth-provider/oauth2/token";
   const formData = new URLSearchParams();
   formData.append("grant_type", grant_type);
@@ -48,6 +55,11 @@ app.post("/tyc", async (req, res) => {
     "Content-Type": "application/vnd.bancolombia.v4+json",
   };
 
+  console.log({
+    'endpoint': '/tyc',
+    'access_token': access_token
+  })
+
   let url =
     baseUrl +
     "/sb//v1/operations/product-specific/consumer-services/brokered-product/bancolombiapay-wallet-syncing/terms/retrieveTerms";
@@ -66,6 +78,11 @@ app.post("/aceptacionTyC", async (req, res) => {
   let access_token = req.body.access_token;
   let aceptacion = req.body.aceptacion;
 
+  console.log({
+    'endpoint': '/aceptacionTyC',
+    'access_token': access_token,
+    'aceptacion': aceptacion
+  })
   let headers = {
     sessionToken: "test",
     messageId: "c4e6bd04-5149-11e7-b114-b2f933d5fe66",
@@ -109,6 +126,11 @@ app.post("/aceptacionTyC", async (req, res) => {
 
 app.post("/saldoCuenta", async (req, res) => {
   let access_token = req.body.access_token;
+
+  console.log({
+    'endpoint': '/saldoCuenta',
+    'access_token': access_token
+  })
   let url =
     baseUrl +
     "/sb//v1/operations/product-specific/consumer-services/brokered-product/bancolombiapay-wallet-information/wallet-balance/retrieveBalance";
