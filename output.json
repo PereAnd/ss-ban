@@ -1,0 +1,19 @@
+{
+    "meta": {
+        "_messageId": "8501f1a4-e95b-4c42-9c3a-30f8374c665d",
+        "_version": "1.0",
+        "_requestDate": "2024-01-17T15:05:02.073Z",
+        "_responseSize": 1,
+        "_clientRequest": "51daaeab18363acf525e749130d9a7a5"
+    },
+    "data": [
+        {
+            "header": {
+                "type": "Transference",
+                "id": "_GJ11GUmhMt"
+            },
+            "transferCode": "_GJ11GUmhMt",
+            "redirectURL": "https://sandbox-boton-ou-dev.apps.ambientesbc.com/web/transfer-gateway/checkout/_GJ11GUmhMt"
+        }
+    ]
+}
