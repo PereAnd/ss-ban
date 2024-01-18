@@ -203,7 +203,7 @@ app.post("/intencionCompra", async (req, res) => {
     data: [
       {
         commerceTransferButtonId: "h4ShG3NER1C",
-        transferReference: "9999999998",
+        transferReference: `REF-${Math.floor(Math.random() * 1000000)}`,
         transferAmount: valorCompra,
         commerceUrl: "https://gateway.com/payment/route?commerce=Telovendo",
         transferDescription: "Compra de productos Cbitbank",
