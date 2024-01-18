@@ -5,6 +5,8 @@ import cors from "cors";
 
 const app = express();
 const port = 3000;
+let valorCompra = 0;
+let transferReference = '';
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -183,8 +185,9 @@ app.post("/saldoCuenta", async (req, res) => {
 
 app.post("/intencionCompra", async (req, res) => {
   let access_token = req.headers.access_token;
-  let valorCompra = req.body.valorCompra;
-
+  valorCompra = req.body.valorCompra;
+  transferReference = `REF-${Math.floor(Math.random() * 1000000)}`
+  
   console.log('------------------------------------');
   console.log({
     endpoint: "/intencionCompra",
@@ -203,7 +206,7 @@ app.post("/intencionCompra", async (req, res) => {
     data: [
       {
         commerceTransferButtonId: "h4ShG3NER1C",
-        transferReference: `REF-${Math.floor(Math.random() * 1000000)}`,
+        transferReference: transferReference,
         transferAmount: valorCompra,
         commerceUrl: "https://gateway.com/payment/route?commerce=Telovendo",
         transferDescription: "Compra de productos Cbitbank",
@@ -234,6 +237,9 @@ app.post("/estadoCompra", async (req, res) => {
   let access_token = req.headers.access_token;
   let transferCode = req.body.transferCode;
 
+  let idTransaccion = Math.floor(Math.random() * 999999) + 1;
+  let idComercio = Math.floor(Math.random() * 999999) + 1;
+
   console.log('------------------------------------');
   console.log({
     endpoint: "/estadoCompra",
@@ -258,8 +264,26 @@ app.post("/estadoCompra", async (req, res) => {
 
   const responseData = await response.json();
   console.log(responseData);
+
+  let estado = responseData['data'] ? responseData['data'][0]['transferState'] : '';
+  let resp = {
+    'transaccion': {
+      "idTransaccion": idTransaccion,
+      "destinoPago": idComercio,
+      "valorCompra": valorCompra,
+      "motivo": "Compra de productos",
+      "fechaTransaccion": responseData['meta'] ? responseData['meta']['_requestDate'] : new Date(),
+      "numeroAprobacion": responseData['data'] ? responseData['data'][0]['transferVoucher'] : 0,
+      "estado": estado,
+      "idTransaccionAutorizador": estado == 'approved' ? transferReference : '' // transferReference = 'REF-123456'
+      // "codigoError": responseData['errors'] ? responseData['errors'][0]['status'] : 0,
+      // "mensajeError": responseData['errors'] ? responseData['errors'][0]['detail'] : "",
+    }
+  }
+  console.log(resp);
   console.log('------------------------------------');
-  res.json(responseData);
+
+  res.json(resp);
 });
 
 app.listen(port, () => {
