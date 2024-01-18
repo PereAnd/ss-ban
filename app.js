@@ -19,6 +19,7 @@ app.post("/tokenBancolombia", async (req, res) => {
   let client_secret = req.body.client_secret;
   let auth64 = btoa(`${client_id}:${client_secret}`);
 
+  console.log('------------------------------------');
   console.log({
     endpoint: "/tokenBancolombia",
     timestamp: new Date(),
@@ -43,6 +44,8 @@ app.post("/tokenBancolombia", async (req, res) => {
   });
 
   const responseData = await response.json();
+  console.log(responseData);
+  console.log('------------------------------------');
 
   res.json(responseData);
 });
@@ -57,6 +60,7 @@ app.post("/tyc", async (req, res) => {
     "Content-Type": "application/vnd.bancolombia.v4+json",
   };
 
+  console.log('------------------------------------');
   console.log({
     endpoint: "/tyc",
     timestamp: new Date(),
@@ -73,6 +77,8 @@ app.post("/tyc", async (req, res) => {
   });
 
   const responseData = await response.json();
+  console.log(responseData);
+  console.log('------------------------------------');
 
   res.json(responseData);
 });
@@ -81,6 +87,7 @@ app.post("/aceptacionTyC", async (req, res) => {
   let access_token = req.body.access_token;
   let aceptacion = req.body.aceptacion;
 
+  console.log('------------------------------------');
   console.log({
     endpoint: "/aceptacionTyC",
     timestamp: new Date(),
@@ -124,6 +131,8 @@ app.post("/aceptacionTyC", async (req, res) => {
   });
 
   const responseData = await response.json();
+  console.log(responseData);
+  console.log('------------------------------------');
 
   res.json(responseData);
 });
@@ -176,6 +185,7 @@ app.post("/intencionCompra", async (req, res) => {
   let access_token = req.headers.access_token;
   let valorCompra = req.body.valorCompra;
 
+  console.log('------------------------------------');
   console.log({
     endpoint: "/intencionCompra",
     timestamp: new Date(),
@@ -215,6 +225,7 @@ app.post("/intencionCompra", async (req, res) => {
 
   const responseData = await response.json();
   console.log(responseData);
+  console.log('------------------------------------');
 
   res.json(responseData);
 });
@@ -223,6 +234,7 @@ app.post("/estadoCompra", async (req, res) => {
   let access_token = req.headers.access_token;
   let transferCode = req.body.transferCode;
 
+  console.log('------------------------------------');
   console.log({
     endpoint: "/estadoCompra",
     timestamp: new Date(),
@@ -246,6 +258,7 @@ app.post("/estadoCompra", async (req, res) => {
 
   const responseData = await response.json();
   console.log(responseData);
+  console.log('------------------------------------');
   res.json(responseData);
 });
 
