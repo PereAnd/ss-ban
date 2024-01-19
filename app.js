@@ -275,9 +275,9 @@ app.post("/estadoCompra", async (req, res) => {
       "fechaTransaccion": responseData['meta'] ? responseData['meta']['_requestDate'] : new Date(),
       "numeroAprobacion": responseData['data'] ? responseData['data'][0]['transferVoucher'] : 0,
       "estado": estado,
-      "idTransaccionAutorizador": estado == 'approved' ? transferReference : '' // transferReference = 'REF-123456'
-      // "codigoError": responseData['errors'] ? responseData['errors'][0]['status'] : 0,
-      // "mensajeError": responseData['errors'] ? responseData['errors'][0]['detail'] : "",
+      "idTransaccionAutorizador": estado == 'approved' ? transferReference : '', // transferReference = 'REF-123456'
+      "codigoError": responseData['httpCode'] ? responseData['httpCode'] : 0,
+      "mensajeError": responseData['httpMessage'] ? responseData['httpMessage'] : "",
     }
   }
   console.log(resp);
