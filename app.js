@@ -7,6 +7,7 @@ const app = express();
 const port = 3000;
 let valorCompra = 0;
 let transferReference = '';
+let clientIP = '';
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -15,19 +16,22 @@ const baseUrl = "https://gw-sandbox-qa.apps.ambientesbc.com/public-partner";
 
 app.post("/tokenBancolombia", async (req, res) => {
   let grant_type = req.body.grant_type;
-  let scope =
-    "Product-balance:read:user TermsConditions:read:user TermsConditions-register:write:user Transfer-Intention:read:app Transfer-Intention:write:app";
+  let scope = "Product-balance:read:user TermsConditions:read:user TermsConditions-register:write:user Transfer-Intention:read:app Transfer-Intention:write:app";
   let client_id = req.body.client_id;
   let client_secret = req.body.client_secret;
   let auth64 = btoa(`${client_id}:${client_secret}`);
+  clientIP = req.ip || req.socket.remoteAddress;
 
   console.log('------------------------------------');
   console.log({
-    endpoint: "/tokenBancolombia",
-    timestamp: new Date(),
     grant_type: grant_type,
     client_id: client_id,
     client_secret: client_secret,
+    metadata: {
+      endpoint: "/generarToken",
+      timestamp: new Date(),
+      clientIP: clientIP
+    }
   });
 
   let url = baseUrl + "/sb//security/oauth-provider/oauth2/token";
@@ -54,6 +58,7 @@ app.post("/tokenBancolombia", async (req, res) => {
 
 app.post("/tyc", async (req, res) => {
   let access_token = req.body.access_token;
+  clientIP = req.ip || req.socket.remoteAddress;
 
   const headers = {
     messageId: "c4e6bd04-5149-11e7-b114-b2f933d5fe66",
@@ -64,9 +69,12 @@ app.post("/tyc", async (req, res) => {
 
   console.log('------------------------------------');
   console.log({
-    endpoint: "/tyc",
-    timestamp: new Date(),
     access_token: access_token,
+    metadata: {
+      endpoint: "/generarToken",
+      timestamp: new Date(),
+      clientIP: clientIP
+    }
   });
 
   let url =
@@ -88,13 +96,17 @@ app.post("/tyc", async (req, res) => {
 app.post("/aceptacionTyC", async (req, res) => {
   let access_token = req.body.access_token;
   let aceptacion = req.body.aceptacion;
+  clientIP = req.ip || req.socket.remoteAddress;
 
   console.log('------------------------------------');
   console.log({
-    endpoint: "/aceptacionTyC",
-    timestamp: new Date(),
     access_token: access_token,
     aceptacion: aceptacion,
+    metadata: {
+      endpoint: "/generarToken",
+      timestamp: new Date(),
+      clientIP: clientIP
+    }
   });
   let headers = {
     sessionToken: "test",
@@ -141,11 +153,15 @@ app.post("/aceptacionTyC", async (req, res) => {
 
 app.post("/saldoCuenta", async (req, res) => {
   let access_token = req.body.access_token;
+  clientIP = req.ip || req.socket.remoteAddress;
 
   console.log({
-    endpoint: "/saldoCuenta",
-    timestamp: new Date(),
     access_token: access_token,
+    metadata: {
+      endpoint: "/generarToken",
+      timestamp: new Date(),
+      clientIP: clientIP
+    }
   });
   let url =
     baseUrl +
@@ -186,14 +202,18 @@ app.post("/saldoCuenta", async (req, res) => {
 app.post("/intencionCompra", async (req, res) => {
   let access_token = req.headers.access_token;
   valorCompra = req.body.valorCompra;
-  transferReference = `REF-${Math.floor(Math.random() * 1000000)}`
+  transferReference = `REF-${Math.floor(Math.random() * 1000000)}`;
+  clientIP = req.ip || req.socket.remoteAddress;
   
   console.log('------------------------------------');
   console.log({
-    endpoint: "/intencionCompra",
-    timestamp: new Date(),
     access_token: access_token,
     valorCompra: valorCompra,
+    metadata: {
+      endpoint: "/generarToken",
+      timestamp: new Date(),
+      clientIP: clientIP
+    }
   });
 
   const headers = {
@@ -236,15 +256,19 @@ app.post("/intencionCompra", async (req, res) => {
 app.post("/estadoCompra", async (req, res) => {
   let access_token = req.headers.access_token;
   let transferCode = req.body.transferCode;
+  clientIP = req.ip || req.socket.remoteAddress;
 
   let idTransaccion = Math.floor(Math.random() * 999999) + 1;
   let idComercio = Math.floor(Math.random() * 999999) + 1;
 
   console.log('------------------------------------');
   console.log({
-    endpoint: "/estadoCompra",
-    timestamp: new Date(),
     access_token: access_token,
+    metadata: {
+      endpoint: "/generarToken",
+      timestamp: new Date(),
+      clientIP: clientIP
+    }
   });
 
   const headers = {
