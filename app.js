@@ -48,8 +48,15 @@ app.post("/tokenBancolombia", async (req, res) => {
     headers: headers,
     body: formData,
   });
-
-  const responseData = await response.json();
+  let responseData = '';
+  try {
+    responseData = await response.json();
+  } catch (e) {
+    responseData = {
+      'message': 'Servidor Bancolombia no disponible',
+      'error': e
+    }
+  }
   console.log(responseData);
   console.log('------------------------------------');
 
@@ -85,8 +92,15 @@ app.post("/tyc", async (req, res) => {
     method: "GET",
     headers: headers,
   });
-
-  const responseData = await response.json();
+  let responseData = '';
+  try {
+    responseData = await response.json();
+  } catch (e) {
+    responseData = {
+      'message': 'Servidor Bancolombia no disponible',
+      'error': e
+    }
+  }
   console.log(responseData);
   console.log('------------------------------------');
 
@@ -144,57 +158,17 @@ app.post("/aceptacionTyC", async (req, res) => {
     body: JSON.stringify(data),
   });
 
-  const responseData = await response.json();
+  let responseData = '';
+  try {
+    responseData = await response.json();
+  } catch (e) {
+    responseData = {
+      'message': 'Servidor Bancolombia no disponible',
+      'error': e
+    }
+  }
   console.log(responseData);
   console.log('------------------------------------');
-
-  res.json(responseData);
-});
-
-app.post("/saldoCuenta", async (req, res) => {
-  let access_token = req.body.access_token;
-  clientIP = req.ip || req.socket.remoteAddress;
-
-  console.log({
-    access_token: access_token,
-    metadata: {
-      endpoint: "/generarToken",
-      timestamp: new Date(),
-      clientIP: clientIP
-    }
-  });
-  let url =
-    baseUrl +
-    "/sb//v1/operations/product-specific/consumer-services/brokered-product/bancolombiapay-wallet-information/wallet-balance/retrieveBalance";
-
-  const headers = {
-    Accept: "application/vnd.bancolombia.v4+json",
-    messageId: "fe21b87b-ebdf-4d54-89b5-3eb4312106b3",
-    IP: "1.1.1.1",
-    deviceId: "123456789",
-    strongAuthentication: true,
-    "Content-Type": "application/vnd.bancolombia.v4+json",
-    "Accept-Encoding": "gzip, deflate, br",
-    Authorization: "Bearer " + access_token,
-  };
-
-  const data = {
-    data: {
-      customer: {
-        relationship: {
-          number: "123456789",
-        },
-      },
-    },
-  };
-
-  const response = await fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify(data),
-  });
-
-  const responseData = await response.json();
 
   res.json(responseData);
 });
@@ -246,7 +220,15 @@ app.post("/intencionCompra", async (req, res) => {
     body: JSON.stringify(data),
   });
 
-  const responseData = await response.json();
+  let responseData = '';
+  try {
+    responseData = await response.json();
+  } catch (e) {
+    responseData = {
+      'message': 'Servidor Bancolombia no disponible',
+      'error': e
+    }
+  }
   console.log(responseData);
   console.log('------------------------------------');
 
@@ -286,7 +268,15 @@ app.post("/estadoCompra", async (req, res) => {
     headers: headers,
   });
 
-  const responseData = await response.json();
+  let responseData = '';
+  try {
+    responseData = await response.json();
+  } catch (e) {
+    responseData = {
+      'message': 'Servidor Bancolombia no disponible',
+      'error': e
+    }
+  }
   console.log(responseData);
 
   let estado = responseData['data'] ? responseData['data'][0]['transferState'] : '';
