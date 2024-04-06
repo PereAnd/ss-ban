@@ -63,7 +63,7 @@ app.post("/tokenBancolombia", async (req, res) => {
 
     res.json(responseData);
   } catch (e) {
-    res.status(500).send({ error: "Servidor Daviplata no disponible" });
+    res.status(500).send({ error: "Servidor Bancolombia no disponible" });
   }
 });
 
@@ -110,7 +110,7 @@ app.post("/tyc", async (req, res) => {
 
     res.json(responseData);
   } catch (e) {
-    res.status(500).send({ error: "Servidor Daviplata no disponible" });
+    res.status(500).send({ error: "Servidor Bancolombia no disponible" });
   }
 });
 
@@ -180,7 +180,7 @@ app.post("/aceptacionTyC", async (req, res) => {
 
     res.json(responseData);
   } catch (e) {
-    res.status(500).send({ error: "Servidor Daviplata no disponible" });
+    res.status(500).send({ error: "Servidor Bancolombia no disponible" });
   }
 });
 
@@ -210,7 +210,7 @@ app.post("/intencionCompra", async (req, res) => {
   let data = {
     data: [
       {
-        commerceTransferButtonId: "VWjl4eeElx",
+        commerceTransferButtonId: "h4ShG3NER1C",//"VWjl4eeElx",
         transferReference: transferReference,
         transferAmount: valorCompra,
         commerceUrl: "https://gateway.com/payment/route?commerce=Telovendo",
@@ -246,7 +246,7 @@ app.post("/intencionCompra", async (req, res) => {
 
     res.json(responseData);
   } catch (e) {
-    res.status(500).send({ error: "Servidor Daviplata no disponible" });
+    res.status(500).send({ error: "Servidor Bancolombia no disponible" });
   }
 });
 
@@ -322,7 +322,7 @@ app.post("/estadoCompra", async (req, res) => {
 
     res.json(resp);
   } catch (e) {
-    res.status(500).send({ error: "Servidor Daviplata no disponible" });
+    res.status(500).send({ error: "Servidor Bancolombia no disponible" });
   }
 });
 
