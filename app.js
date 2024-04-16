@@ -311,6 +311,7 @@ app.post("/estadoCompra", async (req, res) => {
           : 0,
         estado: estado,
         idTransaccionAutorizador: estado == "approved" ? transferReference : "", // transferReference = 'REF-123456'
+        IP: req.ip || req.socket.remoteAddress,
         codigoError: responseData["httpCode"] ? responseData["httpCode"] : 0,
         mensajeError: responseData["httpMessage"]
           ? responseData["httpMessage"]
