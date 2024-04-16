@@ -210,7 +210,7 @@ app.post("/intencionCompra", async (req, res) => {
   let data = {
     data: [
       {
-        commerceTransferButtonId: "h4ShG3NER1C",//"VWjl4eeElx",
+        commerceTransferButtonId: "h4ShG3NER1C", //"VWjl4eeElx",
         transferReference: transferReference,
         transferAmount: valorCompra,
         commerceUrl: "https://gateway.com/payment/route?commerce=Telovendo",
@@ -297,6 +297,8 @@ app.post("/estadoCompra", async (req, res) => {
     let estado = responseData["data"]
       ? responseData["data"][0]["transferState"]
       : "";
+    let ip = req.ip || req.socket.remoteAddress;
+    if (ip.startsWith("::ffff:")) ip = ip.slice(7);
     let resp = {
       transaccion: {
         idTransaccion: idTransaccion,
@@ -311,7 +313,7 @@ app.post("/estadoCompra", async (req, res) => {
           : 0,
         estado: estado,
         idTransaccionAutorizador: estado == "approved" ? transferReference : "", // transferReference = 'REF-123456'
-        IP: req.ip || req.socket.remoteAddress,
+        IP: ip,
         codigoError: responseData["httpCode"] ? responseData["httpCode"] : 0,
         mensajeError: responseData["httpMessage"]
           ? responseData["httpMessage"]
