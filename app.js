@@ -4,10 +4,7 @@ import fetch from "node-fetch";
 import cors from "cors";
 
 const app = express();
-const port = 3001;
-let valorCompra = 0;
-let transferReference = "";
-let clientIP = "";
+const port = 4001;
 
 app.use(cors());
 app.use(bodyParser.json());
